@@ -1,0 +1,25 @@
+name: boutique
+
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: boutique-mongo
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"       # accessible uniquement depuis la machine hôte
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD:-change-moi}
+      MONGO_INITDB_DATABASE: ${MONGO_DB:-boutique}
+    volumes:
+      - mongo-data:/data/db
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  mongo-data:

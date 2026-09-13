@@ -1,0 +1,18 @@
+[project]
+name = "boutique"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pymongo[srv]>=4.18.0",
+    "pytest>=9.1.1",
+    "python-dotenv>=1.2.3",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.3.0",
+    "ipython>=9.17.1",
+    "jupyterlab>=4.6.3",
+]
