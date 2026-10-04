@@ -56,7 +56,7 @@ def main() -> int:
     p.add_argument("categorie")
     p.add_argument("prix")
     p.add_argument("--stock", type=int)
-    p.add_argument("specifiques", nargs="*", help="champs additionnels sou forme cle=valeur")
+    p.add_argument("specifiques", nargs="*", help="champs additionnels sous forme cle=valeur")
 
     p = sub.add_parser("set")
     p.add_argument("sku")
@@ -127,7 +127,7 @@ def main() -> int:
             depot.creer(args.sku, args.nom, args.categorie, args.prix, args.stock, **specifiques)
             print("créé")
 
-        elif args.commend == "set":
+        elif args.command == "set":
             depot.modifier(args.sku, {args.champ: args.valeur})
             print("champ ajouté")
 
